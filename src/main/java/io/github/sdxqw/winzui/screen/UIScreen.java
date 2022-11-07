@@ -7,6 +7,10 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
+/**
+ * Class used to creating screen for the elements
+ * @author sdxqw
+ */
 @Getter
 public class UIScreen extends GuiScreen implements IScreen {
 
@@ -15,7 +19,7 @@ public class UIScreen extends GuiScreen implements IScreen {
     @Override
     public void initGui() {
         sr = new ScaledResolution(mc);
-        drawElement(mc.mouseHelper.deltaX, mc.mouseHelper.deltaY);
+        initElements(mc.mouseHelper.deltaX, mc.mouseHelper.deltaY);
         super.initGui();
     }
 

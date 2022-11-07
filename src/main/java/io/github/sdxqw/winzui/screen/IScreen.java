@@ -1,7 +1,7 @@
 package io.github.sdxqw.winzui.screen;
 
 interface IScreen {
-    default void drawElement(float mouseX, float mouseY) {
+    default void initElements(float mouseX, float mouseY) {
 
     }
 

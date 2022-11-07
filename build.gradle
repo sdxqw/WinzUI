@@ -43,7 +43,8 @@ dependencies {
 }
 
 jar {
-    exclude "**/Tweaker.class"
+    exclude '**/launcher'
+    exclude '**/Tweaker.class'
     dependsOn configurations.compile
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
