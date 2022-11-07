@@ -1,11 +1,9 @@
 package io.github.sdxqw.winzui.element;
 
 import lombok.Getter;
-import net.minecraft.client.Minecraft;
 
 @Getter
 public abstract class UIElement {
-    private final Minecraft mc = Minecraft.getMinecraft();
     private float x;
     private float y;
     private float width;
