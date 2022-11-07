@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://files.minecraftforge.net/maven' }
+        maven { url 'https://repo.spongepowered.org/maven' }
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.github.sdxqw:ForgeGradle:f2c5bb338e'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+compileJava {
+    sourceCompatibility = targetCompatibility = 8
+}
+
+version '1.0'
+group 'io.github.sdxqw.winzui'
+
+minecraft {
+    version = '1.8.9'
+    tweakClass = "io.github.sdxqw.winzui.launcher.Tweaker"
+    mappings = 'stable_22'
+    runDir = 'run'
+    clientJvmArgs = ['-XX:-DisableExplicitGC', '-Xmx1G', '-DFORGE_FORCE_FRAME_RECALC=true']
+    makeObfSourceJar = false
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://libraries.minecraft.net' }
+    maven { url 'https://repo.spongepowered.org/maven' }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
+}
+
+jar {
+    exclude "**/Tweaker.class"
+    dependsOn configurations.compile
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA', 'LICENSE.txt', 'dummyThing', 'module-info.class'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'io.github.sdxqw'
+            artifactId = 'WinzUI'
+            version = '1.0'
+            from components.java
+        }
+    }
+}
