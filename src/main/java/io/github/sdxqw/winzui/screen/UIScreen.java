@@ -12,9 +12,21 @@ import java.io.IOException;
  * @author sdxqw
  */
 @Getter
-public class UIScreen extends GuiScreen implements IScreen {
+public class UIScreen extends GuiScreen {
 
     private ScaledResolution sr;
+
+    public void initElements(float mouseX, float mouseY) {
+
+    }
+
+    public void drawElementsOnScreen(float mouseX, float mouseY) {
+
+    }
+
+    protected void elementsMouseClicked(float mouseX, float mouseY, int state) {
+
+    }
 
     @Override
     public void initGui() {
