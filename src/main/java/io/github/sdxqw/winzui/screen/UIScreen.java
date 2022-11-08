@@ -8,30 +8,25 @@ import org.lwjgl.opengl.GL11;
 import java.io.IOException;
 
 /**
- * Class used to creating screen for the elements
+ * Create screen for the elements / anything you want scaled
+ *
  * @author sdxqw
  */
 @Getter
-public class UIScreen extends GuiScreen {
+public abstract class UIScreen extends GuiScreen {
 
-    private ScaledResolution sr;
+    protected ScaledResolution sr;
 
-    public void initElements(float mouseX, float mouseY) {
+    public abstract void initElements();
 
-    }
+    public abstract void drawElementsOnScreen(float mouseX, float mouseY);
 
-    public void drawElementsOnScreen(float mouseX, float mouseY) {
-
-    }
-
-    protected void elementsMouseClicked(float mouseX, float mouseY, int state) {
-
-    }
+    public abstract void elementsMouseClicked(float mouseX, float mouseY, int state);
 
     @Override
     public void initGui() {
         sr = new ScaledResolution(mc);
-        initElements(mc.mouseHelper.deltaX, mc.mouseHelper.deltaY);
+        initElements();
         super.initGui();
     }
 
@@ -40,7 +35,7 @@ public class UIScreen extends GuiScreen {
         final float scaleFactor = getScaleFactor();
         GL11.glPushMatrix();
         GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
-        drawElementsOnScreen(mouseX / scaleFactor, mouseY / scaleFactor);
+        drawElementsOnScreen((mouseX / scaleFactor), (mouseY / scaleFactor));
         GL11.glPopMatrix();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -48,11 +43,11 @@ public class UIScreen extends GuiScreen {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int state) throws IOException {
         final float scaleFactor = getScaleFactor();
-        elementsMouseClicked(mouseX / scaleFactor, mouseY / scaleFactor, state);
+        elementsMouseClicked((mouseX / scaleFactor), (mouseY / scaleFactor), state);
         super.mouseClicked(mouseX, mouseY, state);
     }
 
-    private float getScaleFactor() {
+    public float getScaleFactor() {
         return 1.0f / (getSr().getScaleFactor() * .5f);
     }
 

@@ -4,7 +4,8 @@ import lombok.Getter;
 import net.minecraft.client.Minecraft;
 
 /**
- * Class used for creating elements
+ * Create elements to be displayed on the screen
+ *
  * @author sdxqw
  */
 @Getter
