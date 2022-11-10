@@ -1,10 +1,12 @@
 package io.github.sdxqw.winzui.element;
 
+import io.github.sdxqw.winzlogger.LogLevel;
+import io.github.sdxqw.winzlogger.Logger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
 public class UIHeader {
-    public UIHeader(float x, float y, int color, String... names) {
+    public static void drawText(float x, float y, int color, String... names) {
         Drawer.drawDefaultText(x, y, color, names);
     }
 
@@ -14,6 +16,28 @@ public class UIHeader {
         static void drawDefaultText(float x, float y, int color, String... names) {
             for (String name : names) {
                 Minecraft.getMinecraft().fontRendererObj.drawString(name, (int) ((sr.getScaledWidth() - Minecraft.getMinecraft().fontRendererObj.getStringWidth(name)) / 2 + x), (int) (sr.getScaledHeight() / 2 + y), color);
+            }
+        }
+
+        static void drawDefaultText(Alignment alignment, float x, float y, int color, String... names) {
+            for (String name : names) {
+                switch (alignment) {
+                    case LEFT:
+                        Minecraft.getMinecraft().fontRendererObj.drawString(name, (int) ((sr.getScaledWidth() - Minecraft.getMinecraft().fontRendererObj.getStringWidth(name)) / 2 - 150 + x), (int) (sr.getScaledHeight() / 2 + y), color);
+                        break;
+                    case RIGHT:
+                        Minecraft.getMinecraft().fontRendererObj.drawString(name, (int) ((sr.getScaledWidth() - Minecraft.getMinecraft().fontRendererObj.getStringWidth(name)) / 2 + 150 + x), (int) (sr.getScaledHeight() / 2 + y), color);
+                        break;
+                    case CENTER:
+                        Minecraft.getMinecraft().fontRendererObj.drawString(name, (int) ((sr.getScaledWidth() - Minecraft.getMinecraft().fontRendererObj.getStringWidth(name)) / 2 + x), (int) (sr.getScaledHeight() / 2 + y), color);
+                        break;
+                    case NONE:
+                        Minecraft.getMinecraft().fontRendererObj.drawString(name, (int) (sr.getScaledWidth() - Minecraft.getMinecraft().fontRendererObj.getStringWidth(name) + x), (int) (sr.getScaledHeight() + y), color);
+                        break;
+                    default:
+                        Logger.print("no alignment", LogLevel.ERROR);
+                        break;
+                }
             }
         }
     }
