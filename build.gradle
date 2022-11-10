@@ -23,10 +23,8 @@ group 'io.github.sdxqw.winzui'
 
 minecraft {
     version = '1.8.9'
-    tweakClass = "io.github.sdxqw.winzui.launcher.Tweaker"
+    tweakClass = 'null'
     mappings = 'stable_22'
-    runDir = 'run'
-    clientJvmArgs = ['-XX:-DisableExplicitGC', '-Xmx1G', '-DFORGE_FORCE_FRAME_RECALC=true']
     makeObfSourceJar = true
 }
 
